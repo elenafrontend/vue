@@ -8,7 +8,7 @@
       <h2>{{ title }}</h2>
       <p class="product-card__price">{{ price }}р.</p>
       <p class="count">Доступно для доставки {{ count }}шт.</p>
-      <button type="button"> Добавить в корзину</button>
+      <button type="button" @click="addToBasket"> Добавить в корзину</button>
     </div>
   </li>
 </template>
@@ -38,8 +38,10 @@ export default {
     }
   },
 
-  data() {
-    return {}
+  methods: {
+    addToBasket() {
+      this.$emit('addToBasket')
+    }
   }
 }
 </script>

@@ -15,6 +15,7 @@
         :price="product.price"
         :imgUrl="product.imgUrl"
         :count="product.count"
+        @addToBasket="addToBasket(index)"
       />
     </ul>  
   </div>
@@ -49,6 +50,12 @@ export default {
         }
 
       ]
+    }
+  },
+
+  methods: {
+    addToBasket(index) {
+      console.log(index);
     }
   }
 }
