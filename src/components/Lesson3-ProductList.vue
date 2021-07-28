@@ -2,9 +2,13 @@
   <div class="product-list">
     <div class="flex top-information">
       <h1>Письменные столы</h1>
-      <!-- <button>
+      <Input v-model="searchText"></Input>
+      {{ searchText }}
+      <!-- v-model делает тоже самое что  и:-->
+      <!-- <input type="text" class="search" :value="searchText" @input="searchText = $event.target.value"> -->
+      <button>
         Найти
-      </button> -->
+      </button>
     </div>
 
     <ul class="list-default flex">
@@ -22,15 +26,20 @@
 </template>
 
 <script>
-import ProductCard from './ProductCard'
+import Input from './Lesson3-Input'
+import ProductCard from './Lesson3-ProductCard'
 
 export default {
   name: 'product-list',
-  components: { ProductCard },
+  components: {
+    Input, 
+    ProductCard 
+  },
   data () {
     return {
+      searchText: 'hello input',
       products: [
-         {
+        {
           title: 'Стол Jim',
           price: 19999,
           imgUrl: 'https://hoff.ru/upload/iblock/8c9/8c989500ee8639b9e3aa267b1888b4af.jpg',
