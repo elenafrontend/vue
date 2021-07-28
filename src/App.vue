@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <MyComponent></MyComponent>
+    <!-- <Lesson1></Lesson1> -->
+    <Lesson1hw />
   </div>
 </template>
 
 <script>
-import MyComponent from './components/MyComponent'
+// import Lesson1 from './components/Lesson1'
+import Lesson1hw from './components/Lesson1-hw'
 
 export default {
   name: 'App',
   components: {
-    MyComponent
+    // Lesson1
+    Lesson1hw
   }
 }
 </script>
