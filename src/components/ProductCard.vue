@@ -8,7 +8,7 @@
       <h2>{{ title }}</h2>
       <p class="product-card__price">{{ price }}р.</p>
       <p class="count">Доступно для доставки {{ count }}шт.</p>
-      <button type="button" @click="addToBasket"> Добавить в корзину</button>
+      <button type="button"> Добавить в корзину</button>
     </div>
   </li>
 </template>
@@ -16,7 +16,28 @@
 <script>
 export default {
   name: 'product-card',
-  props: ['title', 'price', 'imgUrl', 'count'],
+  
+  props: {
+    title: {
+      type: String,
+      validator(value) {
+        return value.length < 50
+      }
+    },
+    price: {
+      Number,
+      required: true
+    },
+    imgUrl: {
+      type: String,
+      default: 'https://tsum.by/images/no-photo.png'
+    },
+    count: {
+      type: Number,
+      default: 0
+    }
+  },
+
   data() {
     return {}
   }
