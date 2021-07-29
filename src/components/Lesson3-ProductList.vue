@@ -2,8 +2,9 @@
   <div class="product-list">
     <div class="flex top-information">
       <h1>Письменные столы</h1>
-      <Input :value="searchText" @search="searchText = $event"></Input>
+      <Input v-model="searchText"></Input>
       {{ searchText }}
+      
       <!-- v-model делает тоже самое что  и:-->
       <!-- <input type="text" class="search" :value="searchText" @input="searchText = $event.target.value"> -->
       
@@ -17,9 +18,17 @@
       Привязывать значение атрибута value к входному параметру value
       По событию input генерировать собственное пользовательское событие input с новым значением -->
 
-      <!-- В родителе подписываемся на это событие на клмпоненте Input 
+      <!-- В родителе подписываемся на это событие на компоненте Input 
       <Input :value="searchText" @search="searchText = $event"></Input>
       -->
+
+      <!-- Ч/з v-model:
+        <Input :value="searchText" @search="searchText = $event"></Input> заменяем на сокращенную запись, которая делает тоже самое
+        === 
+        <Input v-model="searchText"></Input>
+        
+        В свою очередь v-model настраиваем в компоненте
+        -->
 
       <button>
         Найти

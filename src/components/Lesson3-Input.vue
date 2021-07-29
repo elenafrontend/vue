@@ -2,7 +2,6 @@
    <input 
     type="text"
     class="search"
-    :value="value"
     @input="$emit('search', $event.target.value)"
   >
   <!-- Использование v-model на компонентах -->
@@ -37,13 +36,23 @@
     В родителе подписываемся на это событие search
 
     2. Тоже самое что и верхний алгоритм только через настройку v-model:
-    -  
+    -  оставляем прослушиватель события @input="$emit('search', $event.target.value)", который генерирует событие search
+    - настраиваем v-model:
+    export default {
+      model: {
+        props: 'value', //значение от родителя
+        event: 'input' // событие, которое компонент будет слушать в родителе
+      }
+    }
     -->
 </template>
 
 <script>
 export default {
-  props: ['value']
+  model: {
+    props: 'value',
+    event: 'search'
+  }
 }
 </script>
 
