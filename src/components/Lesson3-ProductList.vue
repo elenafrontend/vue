@@ -2,8 +2,7 @@
   <div class="product-list">
     <div class="flex top-information">
       <h1>Письменные столы</h1>
-      <Input v-model="searchText"></Input>
-      {{ searchText }}
+      <search @search="searchProducts"></search>
       
       <!-- v-model делает тоже самое что  и:-->
       <!-- <input type="text" class="search" :value="searchText" @input="searchText = $event.target.value"> -->
@@ -29,10 +28,6 @@
         
         В свою очередь v-model настраиваем в компоненте
         -->
-
-      <button>
-        Найти
-      </button>
     </div>
 
     <ul class="list-default flex">
@@ -50,16 +45,17 @@
 </template>
 
 <script>
-import Input from './Lesson3-Input'
+import Search from './Lesson3-Search'
 import ProductCard from './Lesson3-ProductCard'
 
 export default {
   name: 'product-list',
   components: {
-    Input, 
+    Search, 
     ProductCard 
   },
   data () {
+   
     return {
       searchText: 'hello input',
       products: [
@@ -89,6 +85,11 @@ export default {
   methods: {
     addToBasket(index) {
       console.log(index);
+    },
+
+    searchProducts(searchText) {
+      console.log('Запрос на товар: ' + searchText);
+      
     }
   }
 }
@@ -107,15 +108,5 @@ li {
     margin-bottom: 0;
 }
 
-.top-information button {
-    background-color: rgb(221, 56, 56);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 14px;
-    display: block;
-    cursor: pointer;
-    margin-left: 10px;
-}
 </style>
 
