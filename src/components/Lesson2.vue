@@ -92,8 +92,7 @@
           class="lesson-2__btn"
           @click="isCatVisible = !isCatVisible"
         >
-          <span v-if="isCatVisible">Спрятать</span>
-          <span v-else>Показать</span>
+          {{ isCatVisible ? 'Спрятать' : 'Показать' }}
         </button>
         
       </div>
