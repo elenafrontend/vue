@@ -13,7 +13,7 @@
       <input
         class="form-control"
         id="login"
-        v-model.trim="login"
+        v-model.trim="form.login"
       >
       <!-- модификатор trim обрезает пробелы, которые были введены через форму и они не попадают в переменные -->
     </div>
@@ -23,7 +23,7 @@
         class="form-control"
         id="email"
         type="email"
-        v-model.trim="email"
+        v-model.trim="form.email"
       >
     </div>
 
@@ -33,7 +33,7 @@
         class="form-control"
         id="password"
         type="password"
-        v-model.trim="password"
+        v-model.trim="form.password"
       >
     </div>
 
@@ -45,7 +45,7 @@
         class="form-control"
         id="country"
         type="country"
-        v-model="country"
+        v-model="form.country"
       >
         <option
           v-for="(country, index) of countries"
@@ -66,7 +66,7 @@
         id="favorites"
         type="favorites"
         multiple
-        v-model="favorites"
+        v-model="form.favorites"
       >
         <option
           v-for="(theme, index) of themes"
@@ -87,7 +87,7 @@
         type="checkbox"
         id="notification"
         value="cources"
-        v-model="checkedInputs"
+        v-model="form.checkedInputs"
       >
       <label class="form-check-label" for="notification">Уведомлять меня о новых курсах</label>
     </div>
@@ -98,7 +98,7 @@
         type="checkbox"
         id="notification2"
         value="books"
-        v-model="checkedInputs"
+        v-model="form.checkedInputs"
         checked
       >
       <label class="form-check-label" for="notification2">Уведомлять меня о новых книгах</label>
@@ -108,13 +108,13 @@
   <!-- но при этом значение может быть только одно, поэтому это уже не массив, а строка -->
     <div class="flex">
       <div class="form-check">
-        <input class="form-check-input" type="radio" value="male" name="exampleRadios" id="male" v-model="gender" >
+        <input class="form-check-input" type="radio" value="male" name="exampleRadios" id="male" v-model="form.gender" form.>
         <label class="form-check-label" for="male">
           Мужчина
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" value="female" name="exampleRadios" id="female" v-model="gender">
+        <input class="form-check-input" type="radio" value="female" name="exampleRadios" id="female" v-model="form.gender">
         <label class="form-check-label" for="female">
           Женщина
         </label>
@@ -125,13 +125,22 @@
 </template>
 
 <script>
+// Подключаем vuelidate не глобально, а как миксин
+import { validationMixin } from 'vuelidate'
+
 export default {
+  mixins: [validationMixin],
   data() {
     return {
-      login: '',
-      email: '',
-      password: '',
-      country: 'Sweden',
+      form: {
+        login: '',
+        email: '',
+        password: '',
+        country: 'Sweden',
+        checkedInputs: [],
+        gender: 'male',
+        favorites: ['it'],
+      },
       countries: [
         {
           label: 'Россия',
@@ -146,7 +155,6 @@ export default {
           value: 'Canada'
         }
       ],
-      favorites: ['it'],
       themes: [
         {
           label: 'IT',
@@ -161,11 +169,18 @@ export default {
           value: 'books'
         }
       ],
-      checkedInputs: [],
-      gender: 'male'
+    }
+  },
+  validations: {
+    form: {
+      login: {
+        simpleValidation(value) {
+          console.log(value);
+          return value.length > 5;
+        }
+      }
     }
   }
-  
 }
 </script>
 
