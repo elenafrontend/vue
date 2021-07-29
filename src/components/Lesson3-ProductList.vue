@@ -2,10 +2,25 @@
   <div class="product-list">
     <div class="flex top-information">
       <h1>Письменные столы</h1>
-      <Input v-model="searchText"></Input>
+      <Input :value="searchText" @search="searchText = $event"></Input>
       {{ searchText }}
       <!-- v-model делает тоже самое что  и:-->
       <!-- <input type="text" class="search" :value="searchText" @input="searchText = $event.target.value"> -->
+      
+      <!-- При использовании на компоненте, v-model вместо этого делает следующее: -->
+      <!-- <custom-input
+        v-bind:value="searchText"
+        v-on:input="searchText = $event"
+      ></custom-input> -->
+
+      <!-- Чтобы это действительно работало, элемент <input> внутри компонента должен:
+      Привязывать значение атрибута value к входному параметру value
+      По событию input генерировать собственное пользовательское событие input с новым значением -->
+
+      <!-- В родителе подписываемся на это событие на клмпоненте Input 
+      <Input :value="searchText" @search="searchText = $event"></Input>
+      -->
+
       <button>
         Найти
       </button>
