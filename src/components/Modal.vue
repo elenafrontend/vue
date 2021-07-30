@@ -13,7 +13,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" @scroll="onBodyScroll" ref="modalBody">
           <slot></slot>
         </div>
         <div class="modal-footer">
@@ -21,7 +21,9 @@
             <button class="btn btn-secondary" @click="closeModal">
               Отмена
             </button>
-            <button class="btn btn-primary">Принять</button>
+            <button class="btn btn-primary" :disabled="!isRulesReaded">
+              Принять
+            </button>
           </slot>
         </div>
       </div>
@@ -32,9 +34,26 @@
 <script>
 export default {
   props: ["title"],
+
+  data() {
+    return {
+      isRulesReaded: false,
+    };
+  },
+
   methods: {
     closeModal() {
       this.$emit("close");
+    },
+
+    onBodyScroll() {
+      const modalBody = this.$refs.modalBody;
+      if (
+        modalBody.scrollHeight - modalBody.clientHeight <=
+        modalBody.scrollTop
+      ) {
+        this.isRulesReaded = true;
+      }
     },
   },
 };
