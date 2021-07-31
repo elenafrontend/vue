@@ -5,7 +5,7 @@
       class="btn btn-primary"
       @click="isModalOpen = !isModalOpen"
     >
-      Отправить что-нибудь
+      Подробнее
     </button>
     <Modal
       v-if="isModalOpen"
