@@ -32,12 +32,12 @@
 </template>
 
 <script>
-import ScrollHandler from "../mixins/scrollHandler";
+
+// убираем импорт и подключение миксина
+// потому что теперь он у нас объявлен глобально ч/з плагин SimplePlugin
 
 export default {
   props: ["title"],
-
-  mixins: [ScrollHandler],
 
   data() {
     return {
