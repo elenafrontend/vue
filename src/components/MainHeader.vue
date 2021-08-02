@@ -21,6 +21,10 @@
           </li>
         </ul>
       </nav>
+      <button class="btn btn-outline-light btn-lg" @click="changeUserState">
+        {{ auth ? 'Выйти' : 'Войти' }}
+        <!-- Войти -->
+      </button>
     </div>
   </header>
 </template>
@@ -29,6 +33,7 @@
 export default {
   data() {
     return {
+      auth: true,
       links: [
         {
           name: 'Фильмы',
@@ -36,11 +41,33 @@ export default {
         }
       ]
     }
+  },
+
+   created() {
+    //  проверяем авторизован ли пользователь
+    // this.auth = localStorage.getItem('auth'), если в localStorage auth не равно null
+    this.auth = localStorage.getItem('auth') !== null
+  },
+
+  methods: {
+    changeUserState () {
+      // если выходим из системы
+      // при клике удаляем переменную из localStorage
+      // и делаем редирект пользователя на главную стр
+      if(this.auth) {
+        localStorage.removeItem('auth')
+        this.$router.push( { name: 'main'} )
+      } else {
+        localStorage.setItem('auth', true)
+        this.auth = true
+      }
+    }
   }
+
 }
 </script>
 
-<style>
+<style scoped>
 .main-header {
   padding: 20px;
   min-height: 70px;
@@ -49,7 +76,7 @@ export default {
 
 .main-header .container {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   margin: 0 auto;
 }
 
@@ -71,6 +98,14 @@ export default {
 
 .main-header__links {
   margin-left: 75px;
+}
+
+.main-header__links li {
+  margin-bottom: 0;
+}
+
+.main-header .btn {
+  margin-left: auto;
 }
 
 </style>
