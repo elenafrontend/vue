@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import '@/assets/styles/main.css'
+import router from './router/index'
 
-Vue.config.productionTip = false
 Vue.use(VueRouter)
+
+import '@/assets/styles/main.css'
 
 new Vue({
   render: h => h(App),
+  router
 }).$mount('#app')
