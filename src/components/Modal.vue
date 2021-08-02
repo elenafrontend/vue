@@ -45,6 +45,10 @@ export default {
     };
   },
 
+  created() {
+    this.$myLog()
+  },
+
   methods: {
     closeModal() {
       this.$emit("close");
