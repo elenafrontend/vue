@@ -15,3 +15,9 @@ export default {
   props: ['films'] 
 }
 </script>
+
+<style scoped>
+.film-card {
+  margin-bottom: 40px;
+}
+</style>

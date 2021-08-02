@@ -11,7 +11,6 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #000;
   }
 
   .main-page h1 {

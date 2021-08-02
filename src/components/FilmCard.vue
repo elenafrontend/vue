@@ -24,6 +24,7 @@ export default {
 <style>
 .film-card {
   position: relative;
+  margin-bottom: 40px;
 }
 
 .film-card img {
@@ -74,13 +75,13 @@ export default {
   right: 0;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
+  color: #ffffff !important;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 700;
   font-size: 30px;
-  text-decoration: none;
+  text-decoration: none !important;
   opacity: 0;
   transition: all 0.2s ease;
 }
