@@ -1,37 +1,56 @@
 <template>
-  <div class="film-page container">
-    <h1>{{ film.title }}</h1>
+  <article class="film-page container">
+    <h1 class="line">{{ film.title }}</h1>
     <img
       :src="film.img"
       :alt="film.title"
     >
     <section class="section">
-      <p class="section__title">Немного о сюжете:</p>
+      <h2 class="section__title title">Немного о сюжете:</h2>
       <p class="section__description">{{ film.description }}</p>
     </section>
     <section class="section">
-      <p class="section__title">Рейтинг:</p>
+      <h2 class="section__title title">Рейтинг:</h2>
       <p class="section__description">{{ film.rating }}</p>
     </section>
     <section class="section">
-      <p class="section__title">Актерский состав:</p>
+      <h2 class="section__title title">Актерский состав:</h2>
       <p class="section__description">{{ film.actors.join(', ') }}</p>
     </section>
-    <section class="section">
-      <p class="section__title">Режисеры:</p>
+    <section class="section line">
+      <h2 class="section__title title">Режисеры:</h2>
       <p class="section__description">{{ film.directors.join(', ') }}</p>
     </section>
+    
+    <section class="review">
+      <h2 class="review__title title">Смотрели данный фильм ?</h2>
+      <p class="review__description">Оставьте отзыв:</p>
+      <ul class="review__list list-default">
+        <li class="review__item" v-for="reaction in reactions" :key="reaction.id">
+          <button type="button" class="btn btn-outline-light">
+            {{ reaction.title }}
+          </button>
+        </li>
+      </ul>
+    </section>
 
-  </div>
+  </article>
 </template>
 
 <script>
 import films from '../mocks/films'
+import reactions from '../mocks/reactions'
 
 export default {
   data() {
     return {
-      film: null
+      film: null,
+    }
+  },
+
+  computed: {
+    reactions() {
+      return reactions
     }
   },
 
@@ -44,7 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
 .film-page {
   padding-bottom: 100px;
 }
@@ -58,11 +77,14 @@ export default {
 .film-page  h1 {
     color: #ffffff;
     margin-bottom: 30px;
-    padding-bottom: 15px;
-    position: relative;
 }
 
-.film-page h1::before {
+.film-page .line {
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.film-page .line::before {
   content: '';
   position: absolute;
   width: 100%;
@@ -80,17 +102,47 @@ export default {
   margin-bottom: 30px;
 }
 
-.film-page .section__title {
-  color: #EB5804;
+.film-page .section {
+  margin-bottom: 15px;
+}
+
+.film-page .section.line {
+  margin-bottom: 45px;
+}
+
+.film-page .title {
   font-weight: 700;
   font-size: 25px;
   margin-bottom: 10px;
 }
 
+.film-page .section__title {
+  color: #EB5804;
+}
+
 .film-page .section__description {
-    color: #ffffff;
-    font-size: 18px;
-    line-height: 30px;
-  }
+  margin-bottom: 0;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.review__title {
+  color: #ffffff;
+}
+
+.review__description {
+  font-weight: 600;
+  font-size: 18px;
+  color: #EB5804;
+}
+
+.review__list {
+  display: flex;
+}
+
+.review__item {
+  margin-right: 15px;
+}
 
 </style>
