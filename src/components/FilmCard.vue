@@ -7,7 +7,7 @@
     <p class="film-card__rating">{{ film.rating }}</p>
     <p class="film-card__title">{{ film.title }}</p>
     <router-link
-      :to="{ path: `/films/${film.id}` }"
+      :to="{ name: 'filmPage', params: { id: film.id } }"
       class="film-card__more-info"
     >
       Подробнее о фильме
