@@ -17,10 +17,11 @@ h1, h2, h3, h4 {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
-  li {
-    font-size: 16px;
-    margin-bottom: 14px;
-  }
+}
+
+.list-default li {
+  font-size: 16px;
+  margin-bottom: 14px;
 }
 
 .container {
