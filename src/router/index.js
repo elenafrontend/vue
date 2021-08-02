@@ -4,6 +4,7 @@ import MainPage from '../pages/MainPage'
 import AllFilmsPage from '../pages/AllFilmsPage'
 import FilmPage from '../pages/FilmPage'
 import NotFound from '../pages/404'
+import FilmsLayout from '../pages/FilmsLayout'
 
 export default new VueRouter({
   routes: [
@@ -15,13 +16,20 @@ export default new VueRouter({
     {
       // при изменении пути ссылка остается активной, т.к. подключили ч.з имя
       path: '/films',
-      name: 'films',
-      component: AllFilmsPage
-    },
-    {
-      path: '/films/:id',
-      name: 'filmPage',
-      component: FilmPage
+      name: 'filmsLayout',
+      component: FilmsLayout,
+      children: [
+        {
+          path: '',
+          name: 'films',
+          component: AllFilmsPage,
+        },
+        {
+          path: ':id',
+          name: 'filmPage',
+          component: FilmPage
+        },
+      ]
     },
     {
       path: '*',
