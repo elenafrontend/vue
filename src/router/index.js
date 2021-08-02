@@ -27,7 +27,17 @@ export default new VueRouter({
         {
           path: ':id',
           name: 'filmPage',
-          component: FilmPage
+          component: FilmPage,
+          // https://router.vuejs.org/guide/advanced/navigation-guards.html#navigation-guards
+          // навигационные хуки vue-router используются для перенаправлений или отмены навигационных переходов
+          // в данном случае устанавливаем ограничение на конкр маршрута
+          beforeEnter: (to, from, next) => {
+            if(localStorage.getItem('auth')) {
+              next()
+            } else {
+              next({ name: 'films' })
+            }
+          }
         },
         {
           path: '*/*',
