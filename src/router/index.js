@@ -29,6 +29,10 @@ export default new VueRouter({
           name: 'filmPage',
           component: FilmPage
         },
+        {
+          path: '*/*',
+          redirect: { name: 'films' }
+        }
       ]
     },
     {
