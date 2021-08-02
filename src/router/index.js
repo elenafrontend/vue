@@ -7,11 +7,14 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
+      name: 'main',
       component: MainPage
     },
     {
-      path: '/films',
+      // при изменении пути ссылка остается активной, т.к. подключили ч.з имя
+      path: '/allfilms',
+      name: 'films',
       component: AllFilmsPage
-    }
+    },
   ]
 })
