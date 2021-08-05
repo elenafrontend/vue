@@ -17,7 +17,6 @@ export default {
       films
     }
   }
-  
 }
 </script>
 

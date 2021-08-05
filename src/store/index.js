@@ -6,29 +6,33 @@ import reactions from '../mocks/reactions'
 Vue.use(Vuex)
 
 // имитация запроса на сервер, возвращает промис с задержкой
-const fetch = () => {
-  new Promise((resolve) => { 
+const fetch = (time) => {
+  return new Promise((resolve) => { 
     setTimeout(() => {
       resolve(reactions)
-    }, 1000)
+    }, time)
   })
 }
 
 export default new Vuex.Store({
   state: {
-    count: 0
+    reactions: []
   },
-  getters: {},
+  getters: {
+    reactions(state) {
+      return state.reactions
+    }
+  },
   mutations: {
-    increment (state) {
-      state.count++
+    SET_REACTIONS(state, reactions) {
+      state.reactions = reactions
     }
   },
   actions: {
-    async loadReactions() {
+    async loadReactions({ commit }, time) {
       try {
-        const reactions = await fetch()
-        console.log(reactions);
+        const reactions = await fetch(time)
+        commit('SET_REACTIONS', reactions)
       } catch(error) {
         console.error(error)
       }

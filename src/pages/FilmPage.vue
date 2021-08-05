@@ -39,7 +39,7 @@
 
 <script>
 import films from '../mocks/films'
-import reactions from '../mocks/reactions'
+// import reactions from '../mocks/reactions'
 
 export default {
   data() {
@@ -50,7 +50,7 @@ export default {
 
   computed: {
     reactions() {
-      return reactions
+      return this.$store.getters.reactions
     }
   },
 
@@ -65,7 +65,7 @@ export default {
 
 <style scope>
 .film-page {
-  padding-bottom: 100px;
+  padding-bottom: 100px !important;
 }
 
 .film-page .back {

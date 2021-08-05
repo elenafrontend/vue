@@ -9,6 +9,10 @@
 import MainHeader from '../components/MainHeader'
 
 export default {
-  components: { MainHeader }
+  components: { MainHeader },
+  
+  created() {
+    this.$store.dispatch('loadReactions', 1000)
+  }
 }
 </script>
