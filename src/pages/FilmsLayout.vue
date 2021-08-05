@@ -13,7 +13,7 @@ export default {
   components: { MainHeader },
 
   methods: {
-    ...mapActions(['loadReactions'])
+    ...mapActions({loadReactions: 'reactions/loadReactions'})
   },
   
   created() {

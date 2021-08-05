@@ -49,7 +49,9 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['reactions'])
+    ...mapGetters({
+      reactions: 'reactions/reactions'
+      })
   },
 
   created() {

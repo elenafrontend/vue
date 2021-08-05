@@ -11,6 +11,7 @@ const fetch = (time) => {
 }
 
 export default {
+  namespaced: true,
   state: {
     reactions: []
   },
