@@ -21,19 +21,24 @@
           </li>
         </ul>
       </nav>
-      <button class="btn btn-outline-light btn-lg" @click="changeUserState">
-        {{ auth ? 'Выйти' : 'Войти' }}
-        <!-- Войти -->
+      <button class="btn btn-outline-light btn-lg" @click="isAuthModalOpen = !isAuthModalOpen">
+        <!-- {{ auth ? 'Выйти' : 'Войти' }} -->
+        Войти
       </button>
     </div>
+    <AuthModal
+      v-if="isAuthModalOpen"
+    />
   </header>
 </template>
 
 <script>
+import AuthModal from './AuthModal'
 export default {
+  components: { AuthModal },
   data() {
     return {
-      auth: true,
+      isAuthModalOpen: false,
       links: [
         {
           name: 'Фильмы',
@@ -51,16 +56,7 @@ export default {
 
   methods: {
     changeUserState () {
-      // если выходим из системы
-      // при клике удаляем переменную из localStorage
-      // и делаем редирект пользователя на главную стр
-      if(this.auth) {
-        localStorage.removeItem('auth')
-        this.$router.push( { name: 'main'} )
-      } else {
-        localStorage.setItem('auth', true)
-        this.auth = true
-      }
+      
     }
   }
 
