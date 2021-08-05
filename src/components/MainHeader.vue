@@ -22,12 +22,12 @@
         </ul>
       </nav>
       <button class="btn btn-outline-light btn-lg" @click="isAuthModalOpen = !isAuthModalOpen">
-        <!-- {{ auth ? 'Выйти' : 'Войти' }} -->
-        Войти
+        {{ isUserAuth ? 'Выйти' : 'Войти' }}
       </button>
     </div>
     <AuthModal
       v-if="isAuthModalOpen"
+      @close="isAuthModalOpen = false"
     />
   </header>
 </template>
@@ -39,6 +39,7 @@ export default {
   data() {
     return {
       isAuthModalOpen: false,
+      isUserAuth: false,
       links: [
         {
           name: 'Фильмы',
