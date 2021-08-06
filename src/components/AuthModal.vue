@@ -89,47 +89,16 @@ export default {
       }
     },
 
-    async signIn() {
-        try {
-
-          // test user
-          // {
-          //   "username": "user@example.com",
-          //   "password": "123"
-          // }
-        
-        const responce = await fetch('http://127.0.0.1:8000/api/token/', {
-          method: 'POST',
-          headers: {
-            // тип передаваемых данных
-            'Content-Type': 'application/json'
-          },
-          // утстанавливаем cookies при наличии в ответе от сервера
-          credentials: 'include',
-          // тело запроса
-          body: JSON.stringify({
-            //  данные, которые ввел пользователь
-            username: this.form.email,
-            password: this.form.password,
-          })
-        })
-        const data = await responce.json()
-
-        // обрабатываем ответ сервера
-        if(responce.status === 200 || responce.status === 201) {
+    signIn() {
+      this.$fetch.auth.signIn()
+        .then(responce => { return responce.data })
+        .catch(error => { console.error(error)} )
+        .then(data => {
+          console.log(data);
           localStorage.setItem('user', JSON.stringify(data))
-          // передаем данные пользователя в store
           this.$store.dispatch('user/setUser', data)
-          this.$emit('close')
-        } else {
-          // отображаем ошибки при ответе
-          this.errors = data
-          console.error(data.detail);
-        }
-      } catch (error) {
-        // ошибки при создании запроса
-        console.error(error);
-      }
+          this.close()
+        })
     },
 
     signUp() {
