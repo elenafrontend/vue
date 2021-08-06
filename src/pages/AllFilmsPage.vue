@@ -8,14 +8,18 @@
 <script>
 
 import FilmsList from '../components/FilmsList'
-import films from '../mocks/films'
 
 export default {
   components: { FilmsList },
-  data () {
-    return {
-      films
+  
+  computed: {
+    films() {
+      return this.$store.getters.filmsList
     }
+  },
+
+  created() {
+    this.$store.dispatch('fetchFilms')
   }
 }
 </script>

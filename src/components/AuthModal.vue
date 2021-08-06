@@ -70,7 +70,6 @@ export default {
       errors: ''
     }
   },
-
   
   mounted() {
     this.$modal.show('auth-modal');
