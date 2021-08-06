@@ -1,0 +1,51 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "email": "test",
+      "password": "test"
+    },
+    {
+      "email": "ssss",
+      "password": "ssss",
+      "id": 2
+    },
+    {
+      "email": "ffff",
+      "password": "ffff",
+      "id": 3
+    },
+    {
+      "email": "ffff",
+      "password": "ffff",
+      "id": 4
+    },
+    {
+      "email": "test",
+      "password": "test",
+      "id": 5
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "id": "1",
+      "email": "exampla@ya.ru",
+      "password": "example"
+    },
+    {
+      "email": "test",
+      "password": "test",
+      "id": "hgIkvnI"
+    }
+  ]
+}
