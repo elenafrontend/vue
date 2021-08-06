@@ -21,8 +21,8 @@
           </li>
         </ul>
       </nav>
-      <button class="btn btn-outline-light btn-lg" @click="isAuthModalOpen = !isAuthModalOpen">
-        {{ isUserAuth ? 'Выйти' : 'Войти' }}
+      <button class="btn btn-outline-light btn-lg" @click="onAuthBtnClick">
+        {{ getUser ? 'Выйти' : 'Войти' }}
       </button>
     </div>
     <AuthModal
@@ -34,6 +34,8 @@
 
 <script>
 import AuthModal from './AuthModal'
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   components: { AuthModal },
   data() {
@@ -49,15 +51,28 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters({
+      getUser: 'user/getUser'
+    })
+  },
+
    created() {
-    //  проверяем localstorage авторизован ли пользователь
-    // this.auth = localStorage.getItem('auth'), если в localStorage auth не равно null
-    this.auth = localStorage.getItem('auth') !== null
+    this.setUser(JSON.parse(localStorage.getItem('user')))
   },
 
   methods: {
-    changeUserState () {
-      
+    ...mapActions({
+      setUser: 'user/setUser'
+    }),
+
+    onAuthBtnClick() {
+      if(this.getUser) {
+        localStorage.removeItem('user')
+        this.$router.push({ name: 'main' })
+      } else {
+        this.isAuthModalOpen = true
+      }
     }
   }
 

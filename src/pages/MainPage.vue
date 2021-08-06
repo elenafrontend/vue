@@ -1,7 +1,7 @@
 <template>
   <div class="main-page flex">
     <h1>Онлайн-кинотеатр</h1>
-    <button type="button" class="btn btn-outline-light" @click="$router.push({ name: 'films'})">Перейтии к фильмам</button>
+    <button type="button" class="btn btn-outline-light" @click="$router.push({ name: 'films'})">Перейти к фильмам</button>
   </div>
 </template>
 

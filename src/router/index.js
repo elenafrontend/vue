@@ -32,7 +32,7 @@ export default new VueRouter({
           // навигационные хуки vue-router используются для перенаправлений или отмены навигационных переходов
           // в данном случае устанавливаем ограничение на конкр маршрута
           beforeEnter: (to, from, next) => {
-            if(localStorage.getItem('auth')) {
+            if(localStorage.getItem('user')) {
               next()
             } else {
               next({ name: 'films' })
