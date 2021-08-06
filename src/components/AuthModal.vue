@@ -102,7 +102,18 @@ export default {
     },
 
     signUp() {
-
+      this.$fetch.auth.signUp({
+        email: this.form.email,
+        password: this.form.password,
+      })
+        .then(responce => { return responce.data })
+        .catch(error => { console.error(error)} )
+        .then(data => {
+          console.log(data);
+          localStorage.setItem('user', JSON.stringify(data))
+          this.$store.dispatch('user/setUser', data)
+          this.close()
+        })
     }
   }
 }
