@@ -2,7 +2,7 @@
   <modal
     name="auth-modal"
     width="500px"
-    height="350px"
+    height="auto"
     classes="auth-modal"
     @closed="close"
   >
@@ -15,18 +15,23 @@
           type="text"
           placeholder="Ваша эл. почта"
           v-model="form.email"
+          name="email"
+          :class="{ error : errors }"
         >
       </label>
       
-      <label for="password">
+      <label>
         Пароль
         <input 
           class="form-control"
-          type="text"
+          type="password"
           placeholder="Ваш пароль"
           v-model="form.password"
+          name="password"
+          :class="{ error : errors }"
         >
       </label>
+      <!-- <p v-if="errors">{{ errors.detail }}</p> -->
       <div class="actions">
         <a 
         href="#"
@@ -61,8 +66,14 @@ export default {
       form: {
         email: '',
         password: ''
-      }
+      },
+      errors: ''
     }
+  },
+
+  
+  mounted() {
+    this.$modal.show('auth-modal');
   },
 
   methods: {
@@ -72,15 +83,58 @@ export default {
 
     authFormSubmit() {
       if(this.isSignInForm) {
-        this.close();
+        this.signIn();
       } else {
-        this.isSignInForm = true
+        this.signUp();
       }
-    }
-  },
+    },
 
-  mounted() {
-    this.$modal.show('auth-modal');
+    async signIn() {
+        try {
+
+          // test user
+          // {
+          //   "username": "user@example.com",
+          //   "password": "123"
+          // }
+        
+        const responce = await fetch('http://127.0.0.1:8000/api/token/', {
+          method: 'POST',
+          headers: {
+            // тип передаваемых данных
+            'Content-Type': 'application/json'
+          },
+          // утстанавливаем cookies при наличии в ответе от сервера
+          credentials: 'include',
+          // тело запроса
+          body: JSON.stringify({
+            //  данные, которые ввел пользователь
+            username: this.form.email,
+            password: this.form.password,
+          })
+        })
+        const data = await responce.json()
+
+        // обрабатываем ответ сервера
+        if(responce.status === 200 || responce.status === 201) {
+          localStorage.setItem('user', JSON.stringify(data))
+          // передаем данные пользователя в store
+          this.$store.dispatch('user/setUser', data)
+          this.$emit('close')
+        } else {
+          // отображаем ошибки при ответе
+          this.errors = data
+          console.error(data.detail);
+        }
+      } catch (error) {
+        // ошибки при создании запроса
+        console.error(error);
+      }
+    },
+
+    signUp() {
+
+    }
   }
 }
 </script>
@@ -90,9 +144,9 @@ export default {
   padding: 30px 40px;
 }
 .auth-modal form {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .auth-modal h3 {
@@ -104,14 +158,18 @@ export default {
   margin-bottom: 20px;
 }
 
+.auth-modal .form-control.error {
+  border-color: #eb5804;
+}
+
 .auth-modal .actions {
-  margin-top: auto;
+  margin-top: 35px;
   display: flex;
   align-items: baseline;
 }
 
 .auth-modal a {
-  color: #EB5804;
+  color: #eb5804;
 }
 
 .auth-modal button {

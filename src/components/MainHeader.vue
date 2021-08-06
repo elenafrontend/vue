@@ -50,7 +50,7 @@ export default {
   },
 
    created() {
-    //  проверяем авторизован ли пользователь
+    //  проверяем localstorage авторизован ли пользователь
     // this.auth = localStorage.getItem('auth'), если в localStorage auth не равно null
     this.auth = localStorage.getItem('auth') !== null
   },
